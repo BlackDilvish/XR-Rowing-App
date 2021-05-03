@@ -15,12 +15,14 @@ public class PlayerController : MonoBehaviour
     public Text accelerationInfo;
     public Image gaugeBarTop;
     public Image gaugeBarBottom;
+    public GameObject framesManager;
     public Vector3 mockAcc = new Vector3(0, 0, 0); //for computer debug purposes
     private Rigidbody m_body;
     [SerializeField] private float m_minimalPrepareForce = 0.2f;
     [SerializeField] private float m_minimalMoveForce = 0.6f;
     private MoveData m_moveData = new MoveData();
     private const float M_STEP = 10.0f;
+    private const float M_ESPILON = 0.1f;
 
     void Start()
     {
@@ -42,6 +44,9 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.position = new Vector3(0, 1, 0);
         this.m_body.velocity = new Vector3(0, 0, 0);
+        m_moveData.move = false;
+        m_moveData.preparedForMove = false;
+        framesManager.GetComponent<FramesController>().SetFirstFrame();
     }
 
     private string GetAccelerationInfoString(Vector3 acceleration)
@@ -106,9 +111,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, m_moveData.nextPosition, Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, m_moveData.nextPosition) < 0.02)
+        if (Vector3.Distance(transform.position, m_moveData.nextPosition) < M_ESPILON)
         {
             m_moveData.move = false;
+            framesManager.GetComponent<FramesController>().RenderNextFrame();
         }
     }
 
