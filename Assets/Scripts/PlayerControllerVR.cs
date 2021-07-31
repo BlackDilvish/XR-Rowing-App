@@ -18,7 +18,7 @@ public class PlayerControllerVR : MonoBehaviour
 
         foreach (var device in inputDevices)
         {
-            Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
+            Debug.Log(string.Format("Device found with name '{0}'", device.name));
         }
     }
 
