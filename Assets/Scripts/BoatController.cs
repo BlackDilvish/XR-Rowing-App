@@ -5,6 +5,8 @@ using UnityEngine;
 public class BoatController : MonoBehaviour
 {
     Rigidbody m_rigidbody;
+    public float MIN_VEL = 0.1f;
+
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -12,12 +14,16 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void MoveOneFrame()
     {
-        Debug.Log("test");
-        m_rigidbody.AddForce(new Vector3(0, 0, -10), ForceMode.Impulse);
+        m_rigidbody.AddForce(new Vector3(10, 0, 0), ForceMode.Impulse);
+    }
+
+    public bool IsMoving()
+    {
+        return m_rigidbody.velocity.x > MIN_VEL;
     }
 }
