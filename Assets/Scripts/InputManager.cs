@@ -26,6 +26,21 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
+        PrintHMDVectors();
+    }
+
+    public Vector3 GetHMDPositionVector()
+    {
+        if (m_HMDPositionReference != null && m_HMDPositionReference.action != null)
+        {
+            return m_HMDPositionReference.action.ReadValue<Vector3>();
+        }
+
+        return new Vector3();
+    }
+
+    private void PrintHMDVectors()
+    {
         if (m_HMDPositionReference != null && m_HMDPositionReference.action != null)
         {
             Vector3 value = m_HMDPositionReference.action.ReadValue<Vector3>();
