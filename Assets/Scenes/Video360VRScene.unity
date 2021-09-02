@@ -875,9 +875,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 360173690}
     - target: {fileID: 2526079598409123201, guid: b04ef059dfad5d84bbce42910bd39d1c, type: 3}
+      propertyPath: MIN_BACK_FORCE
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526079598409123201, guid: b04ef059dfad5d84bbce42910bd39d1c, type: 3}
       propertyPath: gaugeBarBottom
       value: 
       objectReference: {fileID: 1301422813}
+    - target: {fileID: 2526079598409123201, guid: b04ef059dfad5d84bbce42910bd39d1c, type: 3}
+      propertyPath: MIN_FORWARD_FORCE
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2526079598409123260, guid: b04ef059dfad5d84bbce42910bd39d1c, type: 3}
       propertyPath: m_Drag
       value: 1

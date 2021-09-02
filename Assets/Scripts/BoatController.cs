@@ -13,8 +13,8 @@ public class BoatController : MonoBehaviour
     private bool m_moveBackReady = false;
 
     [SerializeField] private float MIN_VEL = 0.1f;
-    [SerializeField] private float MIN_BACK_FORCE = 1f;
-    [SerializeField] private float MIN_FORWARD_FORCE = 1f;
+    [SerializeField] private float MIN_BACK_FORCE = 0.2f;
+    [SerializeField] private float MIN_FORWARD_FORCE = 0.5f;
 
     /// <summary>
     public Vector3 mockVector = new Vector3();
@@ -27,10 +27,10 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
-        Vector3 hmdPosition = mockVector;// inputManager.GetHMDPositionVector();
+        Vector3 hmdPosition = inputManager.GetHMDPositionVector();
 
-        UpdateGaugeBars(hmdPosition.x);
-        UpdateMove(hmdPosition.x);
+        UpdateGaugeBars(hmdPosition.z);
+        UpdateMove(hmdPosition.z);
         ApplyRotation();
     }
 
@@ -46,12 +46,12 @@ public class BoatController : MonoBehaviour
 
     public void UpdateMove(float positionValue)
     {
-        if (m_moveBackReady == false && positionValue < -MIN_BACK_FORCE)
+        if (m_moveBackReady == false && positionValue <= -MIN_BACK_FORCE)
         {
             m_moveBackReady = true;
         }
 
-        if (m_moveBackReady == true && positionValue > MIN_FORWARD_FORCE)
+        if (m_moveBackReady == true && positionValue >= MIN_FORWARD_FORCE)
         {
             MoveOneFrame();
             m_moveBackReady = false;
@@ -60,7 +60,7 @@ public class BoatController : MonoBehaviour
 
     private void ApplyRotation()
     {
-        transform.Rotate(Mathf.Sin(Time.time) / 180, 0, 0);
+        transform.Rotate(Mathf.Sin(Time.time) / 50, 0, 0);
     }
 
     private void UpdateGaugeBars(float positionValue)
