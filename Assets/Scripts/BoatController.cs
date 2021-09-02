@@ -60,7 +60,7 @@ public class BoatController : MonoBehaviour
 
     private void ApplyRotation()
     {
-        transform.Rotate(Mathf.Sin(Time.time) / 50, 0, 0);
+        transform.Rotate(Mathf.Sin(Time.time) / 90, 0, 0);
     }
 
     private void UpdateGaugeBars(float positionValue)
@@ -83,19 +83,25 @@ public class BoatController : MonoBehaviour
 
     private void ColorGaugeBars(float positionValue)
     {
-        if (Mathf.Abs(positionValue) < MIN_BACK_FORCE)
+        if (positionValue > MIN_FORWARD_FORCE*2)
+        {
+            gaugeBarTop.color = Color.red;
+        }
+        else if (positionValue > MIN_FORWARD_FORCE && positionValue < MIN_FORWARD_FORCE * 2)
+        {
+            gaugeBarTop.color = Color.yellow;
+        }
+        else if (positionValue < MIN_FORWARD_FORCE && positionValue > -MIN_BACK_FORCE)
         {
             gaugeBarTop.color = Color.green;
             gaugeBarBottom.color = Color.green;
         }
-        else if (Mathf.Abs(positionValue) < MIN_FORWARD_FORCE)
+        else if (positionValue < -MIN_BACK_FORCE && positionValue > -MIN_BACK_FORCE * 2)
         {
-            gaugeBarTop.color = Color.yellow;
             gaugeBarBottom.color = Color.yellow;
         }
-        else
+        if (positionValue < -MIN_BACK_FORCE * 2)
         {
-            gaugeBarTop.color = Color.red;
             gaugeBarBottom.color = Color.red;
         }
     }
