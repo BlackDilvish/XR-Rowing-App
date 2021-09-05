@@ -31,7 +31,7 @@ public class BoatController : MonoBehaviour
 
         UpdateGaugeBars(hmdPosition.z);
         UpdateMove(hmdPosition.z);
-        ApplyRotation();
+        //ApplyRotation();
     }
 
     public void MoveOneFrame()
