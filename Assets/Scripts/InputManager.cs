@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
     public Text m_targetText;
     public InputActionReference m_HMDPositionReference = null;
     public InputActionReference m_HMDRotationReference = null;
+    public InputActionReference m_controllerMenuButton = null;
+
+    public PauseMenu pauseMenu;
 
     void Start()
     {
@@ -21,6 +24,15 @@ public class InputManager : MonoBehaviour
         if (m_HMDRotationReference != null)
         {
             m_HMDRotationReference.action.Enable();
+        }
+
+        if (m_controllerMenuButton != null)
+        {
+            m_controllerMenuButton.action.Enable();
+            m_controllerMenuButton.action.performed += (ctx) =>
+            {
+                pauseMenu?.ChangeState();
+            };
         }
     }
 

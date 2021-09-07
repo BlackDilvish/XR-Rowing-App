@@ -17,7 +17,7 @@ public class VideoController : MonoBehaviour
 
     void Update()
     {
-        if (m_player.isPlaying == false && boat.IsMoving() == true)
+        if (m_player.isPlaying == false && boat.IsMoving() == true && PauseMenu.IsPaused == false)
         {
             PlayVideo();
         }

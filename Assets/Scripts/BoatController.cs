@@ -29,8 +29,11 @@ public class BoatController : MonoBehaviour
     {
         Vector3 hmdPosition = inputManager.GetHMDPositionVector();
 
-        UpdateGaugeBars(hmdPosition.z);
-        UpdateMove(hmdPosition.z);
+        if (PauseMenu.IsPaused == false)
+        {
+            UpdateGaugeBars(hmdPosition.z);
+            UpdateMove(hmdPosition.z);
+        }
         //ApplyRotation();
     }
 
