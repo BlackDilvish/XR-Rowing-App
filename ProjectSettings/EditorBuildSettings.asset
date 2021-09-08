@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Video360VRScene.unity
     guid: 05f99802e89df6e47b2fd21e7e3951cc
+  - enabled: 1
+    path: Assets/Scenes/Frames360VRScene.unity
+    guid: 8b73d5d0d5312d9458df42a9a6bd6626
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 486abd3fae6c8c4418b85c5a2c8c5563, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 20d34ca4c31aec246b0f27f2f4fa89fa, type: 2}

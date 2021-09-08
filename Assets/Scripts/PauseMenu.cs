@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject m_playerPosition;
-    [SerializeField] VideoController videoController;
+    [SerializeField] GameObject m_playerPosition = null;
+    [SerializeField] VideoController videoController = null;
     public static bool IsPaused = false;
+    public Vector3 menuOffset = new Vector3(25, 5, 0);
     void Update()
     {
         
@@ -27,7 +28,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        gameObject.transform.position = m_playerPosition.transform.position + Vector3.right * 20f;
+        gameObject.transform.position = m_playerPosition.transform.position + menuOffset;
         Time.timeScale = 0f;
         videoController?.PauseVideo();
         IsPaused = true;
@@ -43,6 +44,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        Resume();
         SceneManager.LoadScene("MainMenu");
     }
 }

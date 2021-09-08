@@ -16,6 +16,9 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float MIN_BACK_FORCE = 0.2f;
     [SerializeField] private float MIN_FORWARD_FORCE = 0.5f;
 
+    private float maxBackForce = 0f;
+    private float maxForwardForce = 0f;
+
     /// <summary>
     public Vector3 mockVector = new Vector3();
     /// </summary>
@@ -39,7 +42,8 @@ public class BoatController : MonoBehaviour
 
     public void MoveOneFrame()
     {
-        m_rigidbody.AddForce(new Vector3(10, 0, 0), ForceMode.Impulse);
+        const float baseSpeed = 10f;
+        m_rigidbody.AddForce(new Vector3(baseSpeed * GetSpeedFactor(), 0, 0), ForceMode.Impulse);
     }
 
     public bool IsMoving()
@@ -47,17 +51,25 @@ public class BoatController : MonoBehaviour
         return m_rigidbody.velocity.x > MIN_VEL;
     }
 
+    public float GetSpeedFactor()
+    {
+        return (Mathf.Abs(maxBackForce) + maxForwardForce) / (MIN_BACK_FORCE + MIN_FORWARD_FORCE);
+    }
+
     public void UpdateMove(float positionValue)
     {
         if (m_moveBackReady == false && positionValue <= -MIN_BACK_FORCE)
         {
             m_moveBackReady = true;
+            maxBackForce = positionValue;
         }
 
         if (m_moveBackReady == true && positionValue >= MIN_FORWARD_FORCE)
         {
+            maxForwardForce = positionValue;
             MoveOneFrame();
             m_moveBackReady = false;
+
         }
     }
 

@@ -19,6 +19,7 @@ public class VideoController : MonoBehaviour
     {
         if (m_player.isPlaying == false && boat.IsMoving() == true && PauseMenu.IsPaused == false)
         {
+            ChangeVideoSpeed(boat.GetSpeedFactor());
             PlayVideo();
         }
         else if (m_player.isPlaying == true && boat.IsMoving() == false)
@@ -35,6 +36,11 @@ public class VideoController : MonoBehaviour
     public void PlayVideo()
     {
         m_player.Play();
+    }
+
+    private void ChangeVideoSpeed(float speedFactor)
+    {
+        m_player.playbackSpeed = speedFactor;
     }
 
     private void LoadVideoFromUrl(string path)
