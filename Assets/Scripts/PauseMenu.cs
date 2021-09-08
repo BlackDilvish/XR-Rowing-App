@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     {
         gameObject.transform.position = m_playerPosition.transform.position + Vector3.right * 20f;
         Time.timeScale = 0f;
-        videoController.PauseVideo();
+        videoController?.PauseVideo();
         IsPaused = true;
         gameObject.SetActive(true);
     }
