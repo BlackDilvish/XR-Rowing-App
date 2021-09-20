@@ -14,7 +14,7 @@ public class BoatController : MonoBehaviour
 
     [SerializeField] private float MIN_VEL = 0.1f;
     [SerializeField] private float MIN_BACK_FORCE = 0.2f;
-    [SerializeField] private float MIN_FORWARD_FORCE = 0.5f;
+    [SerializeField] private float MIN_FORWARD_FORCE = 0.3f;
 
     private float maxBackForce = 0f;
     private float maxForwardForce = 0f;
@@ -36,13 +36,14 @@ public class BoatController : MonoBehaviour
         {
             UpdateGaugeBars(hmdPosition.z);
             UpdateMove(hmdPosition.z);
+            RotatePaddles(hmdPosition.z);
         }
         //ApplyRotation();
     }
 
     public void MoveOneFrame()
     {
-        const float baseSpeed = 10f;
+        const float baseSpeed = 20f;
         m_rigidbody.AddForce(new Vector3(baseSpeed * GetSpeedFactor(), 0, 0), ForceMode.Impulse);
     }
 
@@ -76,6 +77,16 @@ public class BoatController : MonoBehaviour
     private void ApplyRotation()
     {
         transform.Rotate(Mathf.Sin(Time.time) / 90, 0, 0);
+    }
+
+    private void RotatePaddles(float positionValue)
+    {
+        Transform rightPaddle = transform.GetChild(1);
+        Transform leftPaddle = transform.GetChild(2);
+        float rotationFactor = positionValue * 100f;
+
+        rightPaddle.rotation = Quaternion.Euler(-rotationFactor, rightPaddle.rotation.eulerAngles.y, rightPaddle.rotation.eulerAngles.z);
+        leftPaddle.rotation = Quaternion.Euler(rotationFactor, leftPaddle.rotation.eulerAngles.y, leftPaddle.rotation.eulerAngles.z);
     }
 
     private void UpdateGaugeBars(float positionValue)
