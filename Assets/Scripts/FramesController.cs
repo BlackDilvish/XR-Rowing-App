@@ -5,9 +5,10 @@ using UnityEngine;
 public class FramesController : MonoBehaviour
 {
     public BoatController boat = null;
+    public float distanceTravelledOffset = 20f;
+    private Vector3 nextFramePosition = new Vector3();
     private List<Material> m_frameMaterials = new List<Material>();
     private int m_currentFrame = 0;
-    private bool m_nextFramePrepared = false;
 
     void Start()
     {
@@ -15,18 +16,16 @@ public class FramesController : MonoBehaviour
         m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat2", typeof(Material)) as Material);
 
         RenderSettings.skybox = m_frameMaterials[m_currentFrame++];
+        nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
     }
 
     void Update()
     {
-        if (boat.IsMoving() == true)
+        if (Vector3.Distance(boat.transform.position, nextFramePosition) < 0.5f)
         {
-            m_nextFramePrepared = true;
-        }
-        else if (boat.IsMoving() == false && m_nextFramePrepared == true)
-        {
+            Debug.Log("Teees");
+            nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
             RenderNextFrame();
-            m_nextFramePrepared = false;
         }
     }
 
