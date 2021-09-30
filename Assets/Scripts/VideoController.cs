@@ -12,7 +12,7 @@ public class VideoController : MonoBehaviour
     {
         m_player = GetComponent<VideoPlayer>();
         RenderSettings.skybox = Resources.Load("SkyboxMaterials/VideoMat", typeof(Material)) as Material;
-        LoadVideoFromUrl("C:/C#/Unity/Images/VIDEO_0353.mp4");
+        LoadVideoFromUrl("C:/C#/Unity/Images/VIDEO_0355.mp4"); //VIDEO_0353
     }
 
     void Update()

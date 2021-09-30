@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FramesController : MonoBehaviour
@@ -12,8 +13,13 @@ public class FramesController : MonoBehaviour
 
     void Start()
     {
-        m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat1", typeof(Material)) as Material);
-        m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat2", typeof(Material)) as Material);
+        for (int i = 1; i < 15; i++)
+        {
+            m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
+        }
+        //m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat1", typeof(Material)) as Material);
+        //m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat2", typeof(Material)) as Material);
+        //LoadImageFromDriver();
 
         RenderSettings.skybox = m_frameMaterials[m_currentFrame++];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
@@ -55,6 +61,34 @@ public class FramesController : MonoBehaviour
         else
         {
             Debug.Log($"Frame number {frameNumber} is bigger than count of stored materials");
+        }
+    }
+
+    private IEnumerator LoadImageFromDriver()
+    {
+        string path = "C:/C#/Unity/Images/Road/1.jpg";
+        Texture2D tex;
+        tex = new Texture2D(4, 4, TextureFormat.DXT1, false);
+        using (WWW www = new WWW("file://" + path))
+        {
+            yield return www;
+            www.LoadImageIntoTexture(tex);
+
+            TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+            if (tex.dimension != UnityEngine.Rendering.TextureDimension.Cube)
+            {
+                importer.textureShape = TextureImporterShape.TextureCube;
+                importer.SaveAndReimport();
+            }
+
+            Material material = new Material(Shader.Find("Skybox/Cubemap"));
+            material.mainTexture = tex;
+
+            string savePath = "Materials/test.mat";// AssetDatabase.GetAssetPath(selected);
+
+            AssetDatabase.CreateAsset(material, savePath);
+            AssetDatabase.SaveAssets();
+            m_frameMaterials.Add(material);
         }
     }
 }
