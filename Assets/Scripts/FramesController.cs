@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.IO;
+using UnityEngine.Networking;
 
 public class FramesController : MonoBehaviour
 {
@@ -13,14 +15,13 @@ public class FramesController : MonoBehaviour
 
     void Start()
     {
-        for (int i = 1; i < 15; i++)
-        {
-            m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
-        }
-        //m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat1", typeof(Material)) as Material);
+        //for (int i = 1; i < 15; i++)
+        //{
+        //    m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
+        //}
+        m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat1", typeof(Material)) as Material);
         //m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat2", typeof(Material)) as Material);
-        //LoadImageFromDriver();
-
+        StartCoroutine(LoadImageFromStorage());
         RenderSettings.skybox = m_frameMaterials[m_currentFrame++];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
     }
@@ -64,31 +65,36 @@ public class FramesController : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadImageFromDriver()
+    private IEnumerator LoadImageFromStorage()
     {
-        string path = "C:/C#/Unity/Images/Road/1.jpg";
-        Texture2D tex;
-        tex = new Texture2D(4, 4, TextureFormat.DXT1, false);
-        using (WWW www = new WWW("file://" + path))
-        {
-            yield return www;
-            www.LoadImageIntoTexture(tex);
+        string path = @"C:/C%23/Unity/Images/Road/1.jpg";
+        Debug.Log(new FileInfo(path).Exists);
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture("file:///" + path);
+        Debug.Log(www.result);
+        yield return www.SendWebRequest();
 
-            TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log("test2");
+            Texture tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            AssetDatabase.CreateAsset(tex, "Assets/test.asset");
+            AssetDatabase.SaveAssets();
+            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath("Assets/test.asset");
             if (tex.dimension != UnityEngine.Rendering.TextureDimension.Cube)
             {
                 importer.textureShape = TextureImporterShape.TextureCube;
                 importer.SaveAndReimport();
             }
-
             Material material = new Material(Shader.Find("Skybox/Cubemap"));
             material.mainTexture = tex;
-
-            string savePath = "Materials/test.mat";// AssetDatabase.GetAssetPath(selected);
-
-            AssetDatabase.CreateAsset(material, savePath);
+            AssetDatabase.CreateAsset(material, "Assets/test.mat");
             AssetDatabase.SaveAssets();
-            m_frameMaterials.Add(material);
+            AssetDatabase.Refresh();
         }
     }
 }
