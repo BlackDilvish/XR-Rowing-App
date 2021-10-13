@@ -17,7 +17,7 @@ public class FramesController : MonoBehaviour
     {
         for (int i = 1; i < 15; i++)
         {
-            m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
+            m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/DefaultFrames/River {i}", typeof(Material)) as Material);
         }
         //StartCoroutine(LoadImageFromStorage());
         RenderSettings.skybox = m_frameMaterials[m_currentFrame++];

@@ -12,7 +12,7 @@ public class VideoController : MonoBehaviour
     {
         m_player = GetComponent<VideoPlayer>();
         RenderSettings.skybox = Resources.Load("SkyboxMaterials/VideoMat", typeof(Material)) as Material;
-        LoadVideoFromUrl("C:/C#/Unity/Images/VIDEO_0356.mp4");
+        LoadVideoFromResources("Clip1");
     }
 
     void Update()
@@ -47,6 +47,15 @@ public class VideoController : MonoBehaviour
     {
         m_player.source = VideoSource.Url;
         m_player.url = path;
+        m_player.SetDirectAudioMute(0, true);
+        m_player.Prepare();
+        m_player.prepareCompleted += M_player_prepareCompleted;
+    }
+
+    private void LoadVideoFromResources(string clipName)
+    {
+        m_player.source = VideoSource.VideoClip;
+        m_player.clip = Resources.Load($"Videos/{clipName}", typeof(VideoClip)) as VideoClip;
         m_player.SetDirectAudioMute(0, true);
         m_player.Prepare();
         m_player.prepareCompleted += M_player_prepareCompleted;
