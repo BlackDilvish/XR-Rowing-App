@@ -17,7 +17,7 @@ public class VideoController : MonoBehaviour
 
     void Update()
     {
-        if (m_player.isPlaying == false && boat.IsMoving() == true && PauseMenu.IsPaused == false)
+        if (VideoCanPlay())
         {
             ChangeVideoSpeed(boat.GetSpeedFactor());
             PlayVideo();
@@ -50,6 +50,7 @@ public class VideoController : MonoBehaviour
         m_player.SetDirectAudioMute(0, true);
         m_player.Prepare();
         m_player.prepareCompleted += M_player_prepareCompleted;
+        m_player.loopPointReached += M_player_loopPointReached;
     }
 
     private void LoadVideoFromResources(string clipName)
@@ -59,10 +60,26 @@ public class VideoController : MonoBehaviour
         m_player.SetDirectAudioMute(0, true);
         m_player.Prepare();
         m_player.prepareCompleted += M_player_prepareCompleted;
+        m_player.loopPointReached += M_player_loopPointReached;
     }
 
     private void M_player_prepareCompleted(VideoPlayer source)
     {
         PlayVideo();
+    }
+
+    private void M_player_loopPointReached(VideoPlayer source)
+    {
+        PauseVideo();
+        var finishedLevelMenu = FindObjectOfType<FinishedLevelMenu>(true);
+        finishedLevelMenu.StopLevel();
+    }
+
+    private bool VideoCanPlay()
+    {
+        return m_player.isPlaying == false
+            && boat.IsMoving() == true
+            && PauseMenu.IsPaused == false
+            && FinishedLevelMenu.IsStopped == false;
     }
 }

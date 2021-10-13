@@ -20,7 +20,7 @@ public class FramesController : MonoBehaviour
             m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/DefaultFrames/River {i}", typeof(Material)) as Material);
         }
         //StartCoroutine(LoadImageFromStorage());
-        RenderSettings.skybox = m_frameMaterials[m_currentFrame++];
+        RenderSettings.skybox = m_frameMaterials[m_currentFrame];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
     }
 
@@ -35,14 +35,17 @@ public class FramesController : MonoBehaviour
 
     public void RenderNextFrame()
     {
-        if(m_currentFrame == m_frameMaterials.Count)
-        {
-            m_currentFrame = 0;
-        }
-
-        Material nextFrame = m_frameMaterials[m_currentFrame];
         m_currentFrame += 1;
-        RenderSettings.skybox = nextFrame;
+        if (m_currentFrame < m_frameMaterials.Count)
+        {
+            Material nextFrame = m_frameMaterials[m_currentFrame];
+            RenderSettings.skybox = nextFrame;
+        }
+        else
+        {
+            var finishedLevelMenu = FindObjectOfType<FinishedLevelMenu>(true);
+            finishedLevelMenu.StopLevel();
+        }
     }
 
     public void SetFirstFrame()
