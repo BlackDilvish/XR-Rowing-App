@@ -15,13 +15,11 @@ public class FramesController : MonoBehaviour
 
     void Start()
     {
-        //for (int i = 1; i < 15; i++)
-        //{
-        //    m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
-        //}
-        m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat1", typeof(Material)) as Material);
-        //m_frameMaterials.Add(Resources.Load("SkyboxMaterials/SkyMat2", typeof(Material)) as Material);
-        StartCoroutine(LoadImageFromStorage());
+        for (int i = 1; i < 15; i++)
+        {
+            m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/Road/Road {i}", typeof(Material)) as Material);
+        }
+        //StartCoroutine(LoadImageFromStorage());
         RenderSettings.skybox = m_frameMaterials[m_currentFrame++];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
     }
@@ -30,7 +28,6 @@ public class FramesController : MonoBehaviour
     {
         if (Vector3.Distance(boat.transform.position, nextFramePosition) < 0.5f)
         {
-            Debug.Log("Teees");
             nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
             RenderNextFrame();
         }
@@ -80,7 +77,6 @@ public class FramesController : MonoBehaviour
         }
         else
         {
-            Debug.Log("test2");
             Texture tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
             AssetDatabase.CreateAsset(tex, "Assets/test.asset");
             AssetDatabase.SaveAssets();

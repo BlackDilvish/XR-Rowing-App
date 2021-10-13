@@ -9,10 +9,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] VideoController videoController = null;
     public static bool IsPaused = false;
     public Vector3 menuOffset = new Vector3(25, 5, 0);
-    void Update()
-    {
-        
-    }
 
     public void ChangeState()
     {
@@ -24,6 +20,7 @@ public class PauseMenu : MonoBehaviour
         {
             Pause();
         }
+        SwitchPointersState();
     }
 
     public void Pause()
@@ -46,5 +43,14 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void SwitchPointersState()
+    {
+        var interactorLines = m_playerPosition.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRInteractorLineVisual>();
+        foreach(var interactorLine in interactorLines)
+        {
+            interactorLine.enabled = !interactorLine.enabled;
+        }
     }
 }

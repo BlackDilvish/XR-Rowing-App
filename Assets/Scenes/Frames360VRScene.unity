@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1747566, g: 0.25117862, b: 0.38091606, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1953,10 +1953,122 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodenBoat
       objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1023073805857110422, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1171794391}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_ValidColorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073806593998901, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1023073806593998907, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
       propertyPath: m_InteractionManager
       value: 
