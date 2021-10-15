@@ -18,6 +18,7 @@ public class VideoController : MonoBehaviour
         string url = "https://www.dropbox.com/s/o3dck6il7esxlh2/VIDEO_0365.mp4?dl=1";
         string path = "C:/C#/Unity/Images/Road/mov.mp4";
         StartCoroutine(DownloadVideo(url, path));
+        InputManager.SwitchPointersState(false);
     }
 
     void Update()

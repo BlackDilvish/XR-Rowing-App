@@ -14,18 +14,21 @@ public class FinishedLevelMenu : MonoBehaviour
         gameObject.transform.position = m_playerPosition.transform.position + menuOffset;
         Time.timeScale = 0f;
         IsStopped = true;
+        InputManager.SwitchPointersState(true);
         gameObject.SetActive(true);
     }
 
     public void RestartLevel()
     {
         ResetStopValues();
+        InputManager.SwitchPointersState(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMainMenu()
     {
         ResetStopValues();
+        InputManager.SwitchPointersState(true);
         SceneManager.LoadScene("MainMenu");
     }
 

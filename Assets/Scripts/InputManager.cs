@@ -31,7 +31,8 @@ public class InputManager : MonoBehaviour
             m_controllerMenuButton.action.Enable();
             m_controllerMenuButton.action.performed += (ctx) =>
             {
-                pauseMenu?.ChangeState();
+                if (!FinishedLevelMenu.IsStopped)
+                    pauseMenu?.ChangeState();
             };
         }
     }
@@ -49,6 +50,16 @@ public class InputManager : MonoBehaviour
         }
 
         return new Vector3();
+    }
+
+    public static void SwitchPointersState(bool enable)
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        var interactorLines = player.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRInteractorLineVisual>();
+        foreach (var interactorLine in interactorLines)
+        {
+            interactorLine.enabled = enable;
+        }
     }
 
     private void PrintHMDVectors()

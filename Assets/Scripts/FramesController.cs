@@ -22,6 +22,7 @@ public class FramesController : MonoBehaviour
         //StartCoroutine(LoadImageFromStorage());
         RenderSettings.skybox = m_frameMaterials[m_currentFrame];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
+        InputManager.SwitchPointersState(false);
     }
 
     void Update()

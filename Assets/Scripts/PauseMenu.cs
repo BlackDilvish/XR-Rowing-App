@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour
         {
             Pause();
         }
-        SwitchPointersState();
     }
 
     public void Pause()
@@ -29,6 +28,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         videoController?.PauseVideo();
         IsPaused = true;
+        InputManager.SwitchPointersState(true);
         gameObject.SetActive(true);
     }
 
@@ -36,6 +36,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         IsPaused = false;
+        InputManager.SwitchPointersState(false);
         gameObject.SetActive(false);
     }
 
@@ -43,14 +44,5 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         SceneManager.LoadScene("MainMenu");
-    }
-
-    private void SwitchPointersState()
-    {
-        var interactorLines = m_playerPosition.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRInteractorLineVisual>();
-        foreach(var interactorLine in interactorLines)
-        {
-            interactorLine.enabled = !interactorLine.enabled;
-        }
     }
 }

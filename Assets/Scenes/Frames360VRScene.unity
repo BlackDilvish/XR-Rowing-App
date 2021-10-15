@@ -2589,9 +2589,17 @@ PrefabInstance:
       propertyPath: gaugeBarBottom
       value: 
       objectReference: {fileID: 1310856711}
+    - target: {fileID: 1023073805724340216, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: MIN_FORWARD_FORCE
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1023073805724371291, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
       propertyPath: m_Name
       value: WoodenBoat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023073805724371291, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1023073805857110416, guid: 30d53397baef1a1408f3075f58c75a62, type: 3}
       propertyPath: m_ValidColorGradient.key0.b
