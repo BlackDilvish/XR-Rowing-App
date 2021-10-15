@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.Video;
 
 public class VideoController : MonoBehaviour
@@ -14,10 +12,7 @@ public class VideoController : MonoBehaviour
     {
         m_player = GetComponent<VideoPlayer>();
         RenderSettings.skybox = Resources.Load("SkyboxMaterials/VideoMat", typeof(Material)) as Material;
-        //LoadVideoFromResources("Clip1");
-        string url = "https://www.dropbox.com/s/o3dck6il7esxlh2/VIDEO_0365.mp4?dl=1";
-        string path = "C:/C#/Unity/Images/Road/mov.mp4";
-        StartCoroutine(DownloadVideo(url, path));
+        LoadVideo();
         InputManager.SwitchPointersState(false);
     }
 
@@ -47,6 +42,18 @@ public class VideoController : MonoBehaviour
     private void ChangeVideoSpeed(float speedFactor)
     {
         m_player.playbackSpeed = speedFactor;
+    }
+
+    private void LoadVideo()
+    {
+        if (VideoManager.videoType == UsedVideoType.Local)
+        {
+            LoadVideoFromResources("Clip1");
+        }
+        else
+        {
+            LoadVideoFromUrl(VideoManager.GetCurrentVideoPath());
+        }
     }
 
     private void LoadVideoFromUrl(string path)
@@ -87,24 +94,5 @@ public class VideoController : MonoBehaviour
             && boat.IsMoving() == true
             && PauseMenu.IsPaused == false
             && FinishedLevelMenu.IsStopped == false;
-    }
-
-    IEnumerator DownloadVideo(string url, string path)
-    {
-        var uwr = new UnityWebRequest(url);
-        uwr.method = UnityWebRequest.kHttpVerbGET;
-        var dh = new DownloadHandlerFile(path);
-        dh.removeFileOnAbort = true;
-        uwr.downloadHandler = dh;
-        Debug.Log("Downloading...");
-        yield return uwr.SendWebRequest();
-        Debug.Log("Done");
-
-        if (uwr.isNetworkError || uwr.isHttpError)
-            Debug.Log(uwr.error);
-        else
-            Debug.Log("Download saved to: " + uwr.error);
-
-        LoadVideoFromUrl(path);
     }
 }
