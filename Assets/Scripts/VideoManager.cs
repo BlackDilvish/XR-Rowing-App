@@ -18,15 +18,18 @@ public class VideoManager : MonoBehaviour
 
     public static UsedVideoType videoType = UsedVideoType.Local;
     private static string currentVideoName = "Clip1";
-    private static string basePath = "C:/C#/Unity/Images/Road/";
+    private static string basePath;
     private static string videoDataPath = "Assets/Resources/Data/video_data.txt";
     private static Dictionary<string, string> videoData = new Dictionary<string, string>();
+
+    private static string BUILDIN_VIDEO_NAME = "Clip1";
 
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
         InitVideoData();
         InstantiateVideoOptions();
+        basePath = Application.persistentDataPath + "/";
     }
 
     public static string GetCurrentVideoPath()
@@ -40,7 +43,7 @@ public class VideoManager : MonoBehaviour
         Debug.Log(selectedVideo);
         string url = videoData[selectedVideo];
         string path = basePath + selectedVideo + ".mp4";
-        downloadingInfo.gameObject.SetActive(true);
+        DisableOptionButtons();
         StartCoroutine(DownloadVideo(url, path));
     }
 
@@ -48,30 +51,37 @@ public class VideoManager : MonoBehaviour
     {
         var selectedVideo = EventSystem.current.currentSelectedGameObject.transform.parent;
         var selectedVideoText = selectedVideo.GetChild(0).GetComponent<Text>();
-        GameObject.Find(currentVideoName).transform.GetChild(0).GetComponent<Text>().color = Color.black;
-        selectedVideoText.color = Color.red;
-        Debug.Log(selectedVideoText.text);
-        videoType = selectedVideoText.text == "Clip1" ? UsedVideoType.Local : UsedVideoType.Downloaded;
-        currentVideoName = selectedVideoText.text;
+        if (File.Exists(basePath + selectedVideoText.text + ".mp4") || selectedVideoText.text.Equals(BUILDIN_VIDEO_NAME))
+        {
+            GameObject.Find(currentVideoName).transform.GetChild(0).GetComponent<Text>().color = Color.black;
+            selectedVideoText.color = Color.red;
+            videoType = selectedVideoText.text == BUILDIN_VIDEO_NAME ? UsedVideoType.Local : UsedVideoType.Downloaded;
+            currentVideoName = selectedVideoText.text;
+            Debug.Log("Current video is: " + currentVideoName);
+        }
+        else
+        {
+            Debug.LogError("This video has not been downloaded");
+        }
     }
 
     IEnumerator DownloadVideo(string url, string path)
     {
-        var uwr = new UnityWebRequest(url);
-        uwr.method = UnityWebRequest.kHttpVerbGET;
-        var dh = new DownloadHandlerFile(path);
-        dh.removeFileOnAbort = true;
-        uwr.downloadHandler = dh;
+        var handler = new DownloadHandlerFile(path);
+        handler.removeFileOnAbort = true;
+        var webRequest = new UnityWebRequest(url);
+        webRequest.method = UnityWebRequest.kHttpVerbGET;
+        webRequest.downloadHandler = handler;
         Debug.Log("Downloading...");
-        yield return uwr.SendWebRequest();
+        yield return webRequest.SendWebRequest();
         Debug.Log("Done");
 
-        if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
-            Debug.Log(uwr.error);
+        if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            Debug.Log(webRequest.error);
         else
             Debug.Log("Download saved to: " + path);
 
-        downloadingInfo.gameObject.SetActive(false);
+        EnableOptionButtons();
     }
 
     private void InitVideoData()
@@ -111,5 +121,23 @@ public class VideoManager : MonoBehaviour
         }
 
         GameObject.Find("LibraryCanvas").SetActive(false);
+    }
+
+    private void DisableOptionButtons()
+    {
+        downloadingInfo.gameObject.SetActive(true);
+        foreach (var button in GameObject.Find("ScrollableArea").GetComponentsInChildren<Button>())
+        {
+            button.enabled = false;
+        }
+    }
+
+    private void EnableOptionButtons()
+    {
+        downloadingInfo.gameObject.SetActive(false);
+        foreach (var button in GameObject.Find("ScrollableArea").GetComponentsInChildren<Button>())
+        {
+            button.enabled = true;
+        }
     }
 }
