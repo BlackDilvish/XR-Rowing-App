@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9034362767286737734}
   - component: {fileID: 9034362767286737735}
   - component: {fileID: 9034362767286737732}
-  - component: {fileID: 9034362767286737733}
   m_Layer: 0
   m_Name: WaterPlane
   m_TagString: Untagged
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b590f3a208e71e74396b0f29e29ddcce, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,19 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3bfed117b101f499d380dd1ff3e578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9034362767286737733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9034362767286737730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa9572889a8973d43ae05567cce4fa4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 0.4
+  amplitude: 1
   length: 2
-  speed: 0.005
+  speed: 1
   offset: 0
