@@ -27,6 +27,8 @@ public class BoatController : MonoBehaviour
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
+        MIN_BACK_FORCE = MovementOptions.minimalBackwardDistance;
+        MIN_FORWARD_FORCE = MovementOptions.minimalForwardDistance;
     }
 
     void Update()
