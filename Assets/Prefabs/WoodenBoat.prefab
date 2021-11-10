@@ -117,6 +117,7 @@ MonoBehaviour:
   inputManager: {fileID: 0}
   gaugeBarTop: {fileID: 0}
   gaugeBarBottom: {fileID: 0}
+  HUDText: {fileID: 0}
   MIN_VEL: 0.1
   MIN_BACK_FORCE: 0.2
   MIN_FORWARD_FORCE: 0.3

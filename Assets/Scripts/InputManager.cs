@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        PrintHMDVectors();
+        //PrintHMDVectors();
     }
 
     public Vector3 GetHMDPositionVector()

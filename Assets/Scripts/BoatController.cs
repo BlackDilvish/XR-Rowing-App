@@ -8,6 +8,7 @@ public class BoatController : MonoBehaviour
     public InputManager inputManager;
     public Image gaugeBarTop;
     public Image gaugeBarBottom;
+    public Text HUDText;
 
     private Rigidbody m_rigidbody;
     private bool m_moveBackReady = false;
@@ -37,8 +38,8 @@ public class BoatController : MonoBehaviour
             UpdateGaugeBars(hmdPosition.z);
             UpdateMove(hmdPosition.z);
             RotatePaddles(hmdPosition.z);
+            UpdateHUDInfo();
         }
-        //ApplyRotation();
     }
 
     public void MoveOneFrame()
@@ -74,11 +75,6 @@ public class BoatController : MonoBehaviour
         }
     }
 
-    private void ApplyRotation()
-    {
-        transform.Rotate(Mathf.Sin(Time.time) / 90, 0, 0);
-    }
-
     private void RotatePaddles(float positionValue)
     {
         Transform rightPaddle = transform.GetChild(1);
@@ -87,6 +83,12 @@ public class BoatController : MonoBehaviour
 
         rightPaddle.rotation = Quaternion.Euler(-rotationFactor, rightPaddle.rotation.eulerAngles.y, rightPaddle.rotation.eulerAngles.z);
         leftPaddle.rotation = Quaternion.Euler(rotationFactor, leftPaddle.rotation.eulerAngles.y, leftPaddle.rotation.eulerAngles.z);
+    }
+
+    private void UpdateHUDInfo()
+    {
+        HUDText.text = $"Predkosc lodzi: {m_rigidbody.velocity.x}\n";
+        HUDText.text += $"Pokonana odleglosc: {m_rigidbody.position.x}\n";
     }
 
     private void UpdateGaugeBars(float positionValue)
