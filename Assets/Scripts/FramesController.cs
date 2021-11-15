@@ -12,6 +12,7 @@ public class FramesController : MonoBehaviour
     private Vector3 nextFramePosition = new Vector3();
     private List<Material> m_frameMaterials = new List<Material>();
     private int m_currentFrame = 0;
+    private const float m_minimalCloseDistance = 0.5f;
 
     void Start()
     {
@@ -19,7 +20,6 @@ public class FramesController : MonoBehaviour
         {
             m_frameMaterials.Add(Resources.Load($"SkyboxMaterials/DefaultFrames/River {i}", typeof(Material)) as Material);
         }
-        //StartCoroutine(LoadImageFromStorage());
         RenderSettings.skybox = m_frameMaterials[m_currentFrame];
         nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
         InputManager.SwitchPointersState(false);
@@ -27,7 +27,7 @@ public class FramesController : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(boat.transform.position, nextFramePosition) < 0.5f)
+        if (Vector3.Distance(boat.transform.position, nextFramePosition) < m_minimalCloseDistance)
         {
             nextFramePosition = boat.transform.position + Vector3.right * distanceTravelledOffset;
             RenderNextFrame();

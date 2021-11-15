@@ -37,11 +37,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //PrintHMDVectors();
-    }
-
     public Vector3 GetHMDPositionVector()
     {
         if (m_HMDPositionReference != null && m_HMDPositionReference.action != null)

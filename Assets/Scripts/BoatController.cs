@@ -13,16 +13,13 @@ public class BoatController : MonoBehaviour
     private Rigidbody m_rigidbody;
     private bool m_moveBackReady = false;
 
-    [SerializeField] private float MIN_VEL = 0.1f;
-    [SerializeField] private float MIN_BACK_FORCE = 0.2f;
-    [SerializeField] private float MIN_FORWARD_FORCE = 0.3f;
+    private float MIN_VEL = 0.1f;
+    private float MIN_BACK_FORCE = 0.2f;
+    private float MIN_FORWARD_FORCE = 0.3f;
 
     private float maxBackForce = 0f;
     private float maxForwardForce = 0f;
-
-    /// <summary>
-    public Vector3 mockVector = new Vector3();
-    /// </summary>
+    private const float baseSpeed = 20f;
 
     void Start()
     {
@@ -33,10 +30,10 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
-        Vector3 hmdPosition = inputManager.GetHMDPositionVector();
-
         if (PauseMenu.IsPaused == false)
         {
+            Vector3 hmdPosition = inputManager.GetHMDPositionVector();
+
             UpdateGaugeBars(hmdPosition.z);
             UpdateMove(hmdPosition.z);
             RotatePaddles(hmdPosition.z);
@@ -46,7 +43,6 @@ public class BoatController : MonoBehaviour
 
     public void MoveOneFrame()
     {
-        const float baseSpeed = 20f;
         m_rigidbody.AddForce(new Vector3(baseSpeed * GetSpeedFactor(), 0, 0), ForceMode.Impulse);
     }
 
@@ -62,10 +58,14 @@ public class BoatController : MonoBehaviour
 
     public void UpdateMove(float positionValue)
     {
-        if (m_moveBackReady == false && positionValue <= -MIN_BACK_FORCE)
+        if (positionValue <= -MIN_BACK_FORCE)
         {
-            m_moveBackReady = true;
-            maxBackForce = positionValue;
+            if (m_moveBackReady == false)
+            {
+                m_moveBackReady = true;
+            }
+
+            maxBackForce = Mathf.Min(maxBackForce, positionValue);
         }
 
         if (m_moveBackReady == true && positionValue >= MIN_FORWARD_FORCE)
@@ -73,7 +73,6 @@ public class BoatController : MonoBehaviour
             maxForwardForce = positionValue;
             MoveOneFrame();
             m_moveBackReady = false;
-
         }
     }
 
