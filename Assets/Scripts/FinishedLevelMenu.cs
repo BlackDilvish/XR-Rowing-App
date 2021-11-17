@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class FinishedLevelMenu : MonoBehaviour
 {
-    [SerializeField] GameObject m_playerPosition = null;
+    [SerializeField] private GameObject m_playerPosition = null;
     public static bool IsStopped = false;
-    public Vector3 menuOffset = new Vector3(25, 5, 0);
+    private Vector3 m_menuOffset = new Vector3(25, 5, 0);
 
     public void StopLevel()
     {
-        gameObject.transform.position = m_playerPosition.transform.position + menuOffset;
+        gameObject.transform.position = m_playerPosition.transform.position + m_menuOffset;
         Time.timeScale = 0f;
         IsStopped = true;
         InputManager.SwitchPointersState(true);

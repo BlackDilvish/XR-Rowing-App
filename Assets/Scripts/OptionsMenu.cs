@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public Slider backwardSlider;
-    public Slider forwardSlider;
+    [SerializeField] private Slider backwardSlider = null;
+    [SerializeField] private Slider forwardSlider = null;
 
     private void Start()
     {

@@ -7,11 +7,11 @@ using UnityEngine.Networking;
 
 public class FramesController : MonoBehaviour
 {
-    public BoatController boat = null;
-    public float distanceTravelledOffset = 20f;
+    [SerializeField] private BoatController boat = null;
     private Vector3 nextFramePosition = new Vector3();
     private List<Material> m_frameMaterials = new List<Material>();
     private int m_currentFrame = 0;
+    private const float distanceTravelledOffset = 20f;
     private const float m_minimalCloseDistance = 0.5f;
 
     void Start()

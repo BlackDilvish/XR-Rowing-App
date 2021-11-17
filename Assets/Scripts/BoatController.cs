@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class BoatController : MonoBehaviour
 {
-    public InputManager inputManager;
-    public Image gaugeBarTop;
-    public Image gaugeBarBottom;
-    public Text HUDText;
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private Image gaugeBarTop;
+    [SerializeField] private Image gaugeBarBottom;
+    [SerializeField] private Text HUDText;
 
-    private Rigidbody m_rigidbody;
+    private Rigidbody m_rigidbody = null;
     private bool m_moveBackReady = false;
 
     private float MIN_VEL = 0.1f;

@@ -14,7 +14,7 @@ public enum UsedVideoType
 
 public class VideoManager : MonoBehaviour
 {
-    public Text downloadingInfo;
+    [SerializeField] private Text downloadingInfo = null;
 
     public static UsedVideoType videoType = UsedVideoType.Local;
     private static string currentVideoName = "Clip1";

@@ -7,10 +7,10 @@ using UnityEngine.InputSystem.XR;
 
 public class InputManager : MonoBehaviour
 {
-    public Text m_targetText;
-    public InputActionReference m_HMDPositionReference = null;
-    public InputActionReference m_HMDRotationReference = null;
-    public InputActionReference m_controllerMenuButton = null;
+    [SerializeField] private Text m_targetText = null;
+    [SerializeField] private InputActionReference m_HMDPositionReference = null;
+    [SerializeField] private InputActionReference m_HMDRotationReference = null;
+    [SerializeField] private InputActionReference m_controllerMenuButton = null;
 
     public PauseMenu pauseMenu;
 

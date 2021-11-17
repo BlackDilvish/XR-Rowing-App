@@ -5,8 +5,8 @@ using UnityEngine.Video;
 
 public class VideoController : MonoBehaviour
 {
-    public BoatController boat = null;
-    private VideoPlayer m_player;
+    [SerializeField] private BoatController boat = null;
+    private VideoPlayer m_player = null;
 
     void Start()
     {
