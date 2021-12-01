@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +18,6 @@ public class BoatController : MonoBehaviour
     private float maxBackForce = 0f;
     private float maxForwardForce = 0f;
     private const float baseSpeed = 20f;
-
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -88,8 +85,13 @@ public class BoatController : MonoBehaviour
 
     private void UpdateHUDInfo()
     {
-        HUDText.text = $"Predkosc lodzi: {m_rigidbody.velocity.x}\n";
-        HUDText.text += $"Pokonana odleglosc: {m_rigidbody.position.x}\n";
+        HUDText.text = $"Predkosc lodzi: "+ FormatValueForHUD(m_rigidbody.velocity.x/4, "[m/s]");
+        HUDText.text += $"Pokonana odleglosc: " + FormatValueForHUD(m_rigidbody.position.x/4, "[m]");
+    }
+
+    string FormatValueForHUD(float value, string unit)
+    {
+        return string.Format("{0:F3} {1}\n", value, unit);
     }
 
     private void UpdateGaugeBars(float positionValue)
