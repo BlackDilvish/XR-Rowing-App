@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
@@ -63,38 +62,6 @@ public class FramesController : MonoBehaviour
         else
         {
             Debug.Log($"Frame number {frameNumber} is bigger than count of stored materials");
-        }
-    }
-
-    private IEnumerator LoadImageFromStorage()
-    {
-        string path = @"C:/C%23/Unity/Images/Road/1.jpg";
-        Debug.Log(new FileInfo(path).Exists);
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture("file:///" + path);
-        Debug.Log(www.result);
-        yield return www.SendWebRequest();
-
-        Debug.Log(www.result);
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError(www.error);
-        }
-        else
-        {
-            Texture tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            AssetDatabase.CreateAsset(tex, "Assets/test.asset");
-            AssetDatabase.SaveAssets();
-            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath("Assets/test.asset");
-            if (tex.dimension != UnityEngine.Rendering.TextureDimension.Cube)
-            {
-                importer.textureShape = TextureImporterShape.TextureCube;
-                importer.SaveAndReimport();
-            }
-            Material material = new Material(Shader.Find("Skybox/Cubemap"));
-            material.mainTexture = tex;
-            AssetDatabase.CreateAsset(material, "Assets/test.mat");
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
         }
     }
 }
